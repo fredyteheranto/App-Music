@@ -1,53 +1,62 @@
 <!DOCTYPE html>
 <html ng-app="asideApp">
+    <head>
+        <link data-require="bootstrap-css@3.2.0" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://rawgit.com/dbtek/angular-aside/master/dist/css/angular-aside.css" />
+        <link rel="stylesheet" href="css/style.min.css" />
+        <link rel="stylesheet" href="css/animate.css" />
+        <script src="https://code.angularjs.org/1.4.7/angular.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.2.min.js"></script>
+        <script src="https://rawgit.com/dbtek/angular-aside/master/dist/js/angular-aside.js"></script>
+        <script src="js/aside-angular.js"></script>
+    </head>
+    <body ng-controller="MainCtrl" ng-class="asideState.position">
 
-<head>
-    <link data-require="bootstrap-css@3.2.0" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://rawgit.com/dbtek/angular-aside/master/dist/css/angular-aside.css" />
-    <link rel="stylesheet" href="css/style.min.css" />
-    <script src="https://code.angularjs.org/1.4.7/angular.js"></script>
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.2.min.js"></script>
-    <script src="https://rawgit.com/dbtek/angular-aside/master/dist/js/angular-aside.js"></script>
-    <script src="js/aside-angular.js"></script>
-</head>
-
-<body ng-controller="MainCtrl" ng-class="asideState.position">
-    <div id="content">
-        <div class="jumbotron panel panel-default">
-            <h1>MI-Cancionero</h1>
-            <p>
-                Busca tus canciones y videos y organizalos
-            </p>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Buscar">
-                </div>
-                <button type="submit" class="btn btn-submit">Submit</button>
-            </form>
-        </div>
-        <div class="jumbotron panel panel-default">
-            <p>
+        <div id="content">
+            <div class="jumbotron panel panel-default">
                 <span class="pull-left">
-            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('left',true)">
-              <span class="glyphicon glyphicon-align-justify"></span> Left
-                </button>
-                <button type="button" class="btn btn-default btn-lg" ng-click="openAside('top', true)">
-                    Up <span class="glyphicon glyphicon-arrow-down"></span>
-                </button>
+                    <button type="button" class="btn btn-default btn-lg" ng-click="openAside('left')">
+                    <span class="glyphicon glyphicon-align-justify"></span> Mis canciones
+                    </button>
+                    
                 </span>
-                <span class="pull-right">
-            <button type="button" class="btn btn-default btn-lg" ng-click="openAside('bottom', true)">
-              Down <span class="glyphicon glyphicon-arrow-up"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-lg" ng-click="openAside('right', true)">
-                    Right <span class="glyphicon glyphicon-align-justify"></span>
-                </button>
-                </span>
-            </p>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</body>
+                <h1>MI-Cancionero</h1>
+                <p>
+                    Busca tus canciones y videos y organizalos
+                </p>
+                <div class="col-sm-12">
+                    
+                        <div class="form-group ">
+                            <input type="text" class="form-control" ng-model="busqueda" placeholder="Buscar">
+                        </div>
+                        
+                   
+                </div>
+            </div>
+            <div class="jumbotron panel panel-default">
+                  <table class="table table-striped">
+                <tr>
+                    <th>nombre</th>
+                    <th>genero</th>
+                    <th></th>
+                </tr>
+                
+                <tr ng-repeat="cancion in listadoAudio.canciones |filter:busqueda ">
+                    <td>{{ cancion.nombre }}</td>
+                    <td>{{ cancion.genero }}</td>
+                    <td> <span class="pull-right">
+                        <button type="button" class="btn btn-default btn-lg" ng-click="abrir2Aside('bottom')">
+                        Escuchar {{ cancion.link }}<span class="glyphicon glyphicon-play"></span>
+                        </button>
+                        
+                    </span></td>
+                </tr>
 
+            </table>
+               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </body>
 </html>
